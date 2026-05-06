@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatData";
+import { Link } from "react-router-dom";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -33,6 +34,7 @@ function Blog() {
             <p className="post-body">{post.postbody.slice(0, 200)}...</p>
             <p className="post-time">{formatDate(post.posttime)}</p>
             <p className="post-comments">comments: {post._count.comments}</p>
+            <Link to={`${post.id}`}>Read Post</Link>
           </div>
         ))}
       </main>

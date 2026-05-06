@@ -6,6 +6,8 @@ import App from "./App.jsx";
 import CreateUser from "./CreateUser.jsx";
 import Login from "./Login.jsx";
 import Blog from "./Blog.jsx";
+import Post from "./Post.jsx";
+import Home from "./Home.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,16 +15,24 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "login",
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "createUser",
+        path: "/createUser",
         element: <CreateUser />,
       },
       {
-        path: "blog",
+        path: "/posts",
         element: <Blog />,
+      },
+      {
+        path: "/posts/:postID",
+        element: <Post />,
       },
     ],
   },

@@ -1,21 +1,12 @@
-function NavBar({ sections, active, onChange }) {
+import { Link } from "react-router-dom";
+
+function NavBar() {
   return (
     <nav>
       <div className="nav-bar">
-        {sections?.map((section) => (
-          <a
-            key={section}
-            href="#"
-            className={active === section ? "active" : ""}
-            aria-current={active === section ? "page" : undefined}
-            onClick={(e) => {
-              e.preventDefault();
-              onChange(section);
-            }}
-          >
-            {section}
-          </a>
-        ))}
+        <Link to="/home">Home</Link>
+        <Link to="/posts">Blog</Link>
+        <Link to="/login">Log In</Link>
       </div>
     </nav>
   );
