@@ -1,8 +1,27 @@
 .form-input {
-  width: 225px;
+  width: 250px;
   height: 30px;
+  padding-left: 5px;
 }
 
+.form-button {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  background: none;
+  border: 1px solid rgb(91, 117, 53);
+  border-radius: 10px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  color: rgb(105, 93, 93);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.form-button:hover {
+  background: blanchedalmond;
+  color: black;
+}
 label {
   display: flex;
   flex-direction: column-reverse;
@@ -18,4 +37,14 @@ label > input[placeholder=" "]:not(:focus):placeholder-shown + span {
   pointer-events: none;
   opacity: 0.5;
   margin-left: 5px;
+}
+
+.create-link {
+  color: blueviolet;
+  transition: font-size 0.5s;
+}
+
+.create-link:hover {
+  color: blue;
+  font-size: 17px;
 }

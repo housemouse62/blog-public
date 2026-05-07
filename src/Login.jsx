@@ -1,9 +1,12 @@
 import "./Login.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 function Login() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
+  const { setTokenState, setUserState } = useAuth();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,8 +25,12 @@ function Login() {
           }),
         });
         const nextresponse = await response.json();
+        console.log(nextresponse);
+
         if (nextresponse.token) {
           alert("You are logged in");
+          setTokenState(nextresponse.token);
+          setUserState(nextresponse.user);
           localStorage.setItem("token", nextresponse.token);
         } else alert("Check your login credentials");
       } catch (error) {
@@ -51,6 +58,7 @@ function Login() {
                   placeholder=" "
                   value={emailState}
                   onChange={(e) => setEmailState(e.target.value)}
+                  autoComplete="email"
                   required
                 />
                 <span>Email</span>
@@ -66,16 +74,21 @@ function Login() {
                   placeholder=" "
                   value={passwordState}
                   onChange={(e) => setPasswordState(e.target.value)}
+                  autoComplete="password"
                   required
                 />
                 <span>Password</span>
               </label>
             </div>
           </div>
-          <button type="submit" class="form-button">
+          <button type="submit" className="form-button">
             Log In
           </button>
         </form>
+        <p>Not a registered User?</p>
+        <Link className="create-link" to="/createUser">
+          Register here!
+        </Link>
       </div>
     </>
   );
