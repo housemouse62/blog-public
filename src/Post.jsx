@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatData";
+import "./Post.css";
 
 function Post() {
   const params = useParams();
@@ -27,14 +28,21 @@ function Post() {
 
   return (
     <>
-      <h1>Post: {post.title}</h1>
-      <p>{post.postbody}</p>
-      <p>{formatDate(post.posttime)}</p>
-      <div className="comments-div">
-        {post.comments?.map((comment) => (
-          <p>{comment.commentbody}</p>
-        ))}
-      </div>
+      <main className="post-div">
+        <h1 className="post-title">{post.title}</h1>
+        <p>{post.postbody}</p>
+        <div className="date-div">
+          <p>{formatDate(post.posttime)}</p>
+        </div>
+        <div className="comments-div">
+          <h2 className="comments-title">Comments:</h2>
+          {post.comments?.map((comment) => (
+            <div className="comment-div">
+              <p>{comment.commentbody}</p>
+            </div>
+          ))}
+        </div>
+      </main>
     </>
   );
 }

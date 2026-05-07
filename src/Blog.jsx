@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatData";
 import { Link } from "react-router-dom";
+import "./Blog.css";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -26,15 +27,22 @@ function Blog() {
 
   return (
     <>
-      <main className="posts-main">
-        <h1>The Blog</h1>
+      <main className="blog-main">
+        <h1 className="blog-title">The Blog</h1>
         {posts.map((post) => (
-          <div key={post.id}>
-            <h2 className="post-title">{post.title}</h2>
-            <p className="post-body">{post.postbody.slice(0, 200)}...</p>
-            <p className="post-time">{formatDate(post.posttime)}</p>
-            <p className="post-comments">comments: {post._count.comments}</p>
-            <Link to={`${post.id}`}>Read Post</Link>
+          <div className="blog-div" key={post.id}>
+            <h2 className="blog-title">{post.title}</h2>
+            <p className="blog-body">{post.postbody.slice(0, 200)}...</p>
+
+            <div className="blog-time-comments-read">
+              <div className="blog-link-date">
+                <Link className="blog-link" to={`${post.id}`}>
+                  Read Post
+                </Link>
+                <p className="blog-time">{formatDate(post.posttime)}</p>
+              </div>
+              <p className="blog-comments">comments: {post._count.comments}</p>
+            </div>
           </div>
         ))}
       </main>

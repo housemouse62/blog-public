@@ -1,0 +1,21 @@
+.form-input {
+  width: 225px;
+  height: 30px;
+}
+
+label {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+label > span {
+  transition: all 0.2s;
+  transform-origin: top left;
+}
+
+label > input[placeholder=" "]:not(:focus):placeholder-shown + span {
+  transform: translateY(1.5em) scale(1.25);
+  pointer-events: none;
+  opacity: 0.5;
+  margin-left: 5px;
+}
