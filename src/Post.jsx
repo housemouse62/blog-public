@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatData";
+import { useAuth } from "./AuthContext";
 import "./Post.css";
 
 function Post() {
   const params = useParams();
   const [post, setPost] = useState([]);
+  const [commentState, setCommentState] = useState([]);
+  const { userState, tokenState } = useAuth();
 
   useEffect(() => {
     const fetchposts = async () => {
@@ -26,6 +29,35 @@ function Post() {
     fetchposts();
   }, []);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const fetchComment = async () => {
+      const url = `http://localhost:3000/posts/${params.postID}/comments`;
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${tokenState}`,
+          },
+          body: JSON.stringify({
+            commentbody: commentState,
+            postID: params.postID,
+            authorID: userState.id,
+          }),
+        });
+        const nextresponse = await response.json();
+        if (nextresponse.id) {
+          alert("Comment Posted");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchComment();
+  }
+
   return (
     <>
       <main className="post-div">
@@ -34,6 +66,30 @@ function Post() {
         <div className="date-div">
           <p>{formatDate(post.posttime)}</p>
         </div>
+        {userState ? (
+          <form onSubmit={handleSubmit}>
+            <div className="post-comments-div">
+              <label htmlFor="post-comment">
+                Have a comment? Let's hear it.
+              </label>
+              <textarea
+                className="post-comment-box"
+                name="commentbody"
+                id="post-comment"
+                value={commentState}
+                onChange={(e) => setCommentState(e.target.value)}
+              />
+              <button type="submit">Submit Comment</button>
+            </div>
+          </form>
+        ) : (
+          <div>
+            <p>
+              Want to comment? <Link to="/login">Login</Link>or{" "}
+              <Link to="/createUser">Register</Link>
+            </p>
+          </div>
+        )}
         <div className="comments-div">
           <h2 className="comments-title">Comments:</h2>
           {post.comments?.map((comment) => (
