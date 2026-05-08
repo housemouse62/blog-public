@@ -1,4 +1,4 @@
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import formatDate from "../utils/formatData";
 import { useAuth } from "./AuthContext";
@@ -9,6 +9,7 @@ function Post() {
   const [post, setPost] = useState([]);
   const [commentState, setCommentState] = useState([]);
   const { userState, tokenState } = useAuth();
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     const fetchposts = async () => {
@@ -27,7 +28,7 @@ function Post() {
       }
     };
     fetchposts();
-  }, []);
+  }, [refresh]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -50,6 +51,8 @@ function Post() {
         const nextresponse = await response.json();
         if (nextresponse.id) {
           alert("Comment Posted");
+          setRefresh((prev) => prev + 1);
+          setCommentState("");
         }
       } catch (error) {
         console.error(error);

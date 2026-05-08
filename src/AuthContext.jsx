@@ -1,10 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [tokenState, setTokenState] = useState("");
-  const [userState, setUserState] = useState("");
+  const token = localStorage.getItem("token");
+
+  const [tokenState, setTokenState] = useState(token || "");
+  const [userState, setUserState] = useState(
+    token ? jwtDecode(token).tokenUser : "",
+  );
 
   return (
     <AuthContext.Provider
