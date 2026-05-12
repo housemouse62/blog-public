@@ -7,7 +7,6 @@ import CreateUser from "./CreateUser.jsx";
 import Login from "./Login.jsx";
 import Blog from "./Blog.jsx";
 import Post from "./Post.jsx";
-import Home from "./Home.jsx";
 import AuthProvider from "./AuthContext.jsx";
 
 const router = createBrowserRouter([
@@ -16,11 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/login",
+        index: true,
         element: <Login />,
       },
       {

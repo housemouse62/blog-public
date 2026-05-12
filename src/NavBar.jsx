@@ -12,16 +12,14 @@ function NavBar() {
     }
   }
 
-  console.log(userState);
   return (
     <nav>
       <div className="nav-bar">
-        <Link to="/home">Home</Link>
         <Link to="/posts">Blog</Link>
         {userState ? (
           <Link onClick={handleLogout}>Log Out</Link>
         ) : (
-          <Link to="/login">Log In</Link>
+          <Link to="/">Log In</Link>
         )}
       </div>
     </nav>

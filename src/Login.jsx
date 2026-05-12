@@ -2,11 +2,13 @@ import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const { setTokenState, setUserState } = useAuth();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +34,7 @@ function Login() {
           setTokenState(nextresponse.token);
           setUserState(nextresponse.user);
           localStorage.setItem("token", nextresponse.token);
+          navigate("/posts");
         } else alert("Check your login credentials");
       } catch (error) {
         console.error(error);
@@ -81,7 +84,7 @@ function Login() {
               </label>
             </div>
           </div>
-          <button type="submit" className="form-button">
+          <button type="submit" className="form-button login-button">
             Log In
           </button>
         </form>

@@ -19,13 +19,6 @@
   flex-direction: column;
 }
 
-.post-comments-div button {
-  width: fit-content;
-  padding: 3px 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-}
 .post-comment-box {
   width: 400px;
   height: 200px;
@@ -35,11 +28,41 @@
 }
 .comment-div {
   display: flex;
+  flex-direction: column;
   width: fit-content;
   max-width: 50%;
-  text-align: start;
+  margin-top: 20px;
+}
+
+.comment-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 150px;
   background-color: rgb(235, 230, 230);
-  padding: 5px 10px;
-  margin: 20px 0 0 10px;
   border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.comment-author {
+  align-self: flex-start;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 2px 0 0 0;
+}
+
+.comment-body {
+  display: flex;
+  text-align: start;
+}
+
+.comment-time {
+  align-self: flex-end;
+  font-size: 12px;
+}
+
+.delete-div {
+  display: flex;
+  justify-content: end;
+  color: rgb(148, 148, 239);
 }

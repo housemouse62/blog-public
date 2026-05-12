@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import formatDate from "../utils/formatData";
+import formatDate from "../utils/formatDate";
 import { useAuth } from "./AuthContext";
 import "./Post.css";
 
@@ -10,7 +10,7 @@ function Post() {
   const [commentState, setCommentState] = useState([]);
   const { userState, tokenState } = useAuth();
   const [refresh, setRefresh] = useState(0);
-
+  console.log(userState);
   useEffect(() => {
     const fetchposts = async () => {
       const url = `http://localhost:3000/posts/${params.postID}`;
@@ -34,7 +34,7 @@ function Post() {
     e.preventDefault();
 
     const fetchComment = async () => {
-      const url = `http://localhost:3000/posts/${params.postID}/comments`;
+      const url = `http://localhost:3000/posts/${params.postID}/comments/`;
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -73,16 +73,19 @@ function Post() {
           <form onSubmit={handleSubmit}>
             <div className="post-comments-div">
               <label htmlFor="post-comment">
-                Have a comment? Let's hear it.
+                <textarea
+                  className="post-comment-box"
+                  name="commentbody"
+                  placeholder=" "
+                  id="post-comment"
+                  value={commentState}
+                  onChange={(e) => setCommentState(e.target.value)}
+                />
+                <span>Have a comment? Let's hear it.</span>
               </label>
-              <textarea
-                className="post-comment-box"
-                name="commentbody"
-                id="post-comment"
-                value={commentState}
-                onChange={(e) => setCommentState(e.target.value)}
-              />
-              <button type="submit">Submit Comment</button>
+              <button className="form-button" type="submit">
+                Submit Comment
+              </button>
             </div>
           </form>
         ) : (
@@ -96,8 +99,31 @@ function Post() {
         <div className="comments-div">
           <h2 className="comments-title">Comments:</h2>
           {post.comments?.map((comment) => (
-            <div className="comment-div">
-              <p>{comment.commentbody}</p>
+            <div key={comment.id} className="comment-div">
+              <div className="comment-wrapper">
+                <p className="comment-author">
+                  {comment.author.screenname
+                    ? comment.author.screenname
+                    : "anonymous"}
+                </p>
+                <div className="comment-body">
+                  <p>&ldquo;{comment.commentbody}&rdquo;</p>
+                </div>
+                <p className="comment-time">
+                  {formatDate(comment.commenttime)}
+                </p>
+              </div>
+              {comment.authorID === userState.id && (
+                <div className="delete-div">
+                  <Link
+                    onClick={(e) => {
+                      handleDeleteComment(e, comment.id);
+                    }}
+                  >
+                    Delete
+                  </Link>
+                </div>
+              )}
             </div>
           ))}
         </div>

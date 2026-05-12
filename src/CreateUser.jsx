@@ -5,6 +5,7 @@ import "./CreateUser.css";
 
 function CreateUser() {
   const [nameState, setNameState] = useState("");
+  const [screennameState, setScreennameState] = useState("");
   const [emailState, setEmailState] = useState("");
   const [confirmEmailState, setConfirmEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
@@ -24,6 +25,7 @@ function CreateUser() {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
+            screenname: screennameState,
             email: emailState,
             confirmEmail: confirmEmailState,
             password: passwordState,
@@ -34,7 +36,7 @@ function CreateUser() {
         const nextresponse = await response.json();
         if (nextresponse.id) {
           alert("User Created");
-          navigate("/create");
+          navigate("/createUser");
         } else alert("Hmmm, try again.");
       } catch (error) {
         console.error(error);
@@ -64,6 +66,20 @@ function CreateUser() {
                   autoComplete="name"
                 />
                 <span>Name</span>
+              </label>
+            </div>
+            <div className="form-field">
+              <label className="form-label">
+                <input
+                  type="text"
+                  name="screenname"
+                  id="screenname"
+                  className="form-input"
+                  placeholder=" "
+                  value={screennameState}
+                  onChange={(e) => setScreennameState(e.target.value)}
+                />
+                <span>Screename</span>
               </label>
             </div>
             <div className="form-field">
@@ -136,7 +152,7 @@ function CreateUser() {
           </button>
         </form>
         Already a User?{" "}
-        <Link className="login-link" to="/login">
+        <Link className="login-link" to="/">
           Login here.
         </Link>
       </div>

@@ -5,8 +5,9 @@
 }
 
 .form-button {
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 0.8rem;
+  width: fit-content;
   background: none;
   border: 1px solid rgb(91, 117, 53);
   border-radius: 10px;
@@ -32,7 +33,9 @@ label > span {
   transform-origin: top left;
 }
 
-label > input[placeholder=" "]:not(:focus):placeholder-shown + span {
+label
+  > :is(input, textarea)[placeholder=" "]:not(:focus):placeholder-shown
+  + span {
   transform: translateY(1.5em) scale(1.25);
   pointer-events: none;
   opacity: 0.5;
@@ -47,4 +50,8 @@ label > input[placeholder=" "]:not(:focus):placeholder-shown + span {
 .create-link:hover {
   color: blue;
   font-size: 17px;
+}
+
+.login-button {
+  margin-bottom: 10px;
 }

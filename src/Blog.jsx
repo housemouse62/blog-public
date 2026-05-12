@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import formatDate from "../utils/formatData";
+import formatDate from "../utils/formatDate";
 import { Link } from "react-router-dom";
 import "./Blog.css";
 
