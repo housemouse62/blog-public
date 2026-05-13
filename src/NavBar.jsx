@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import "./NavBar.css";
 
 function NavBar() {
   const { userState, setTokenState, setUserState } = useAuth();
@@ -16,6 +17,7 @@ function NavBar() {
     <nav>
       <div className="nav-bar">
         <Link to="/posts">Blog</Link>
+        <Link to="/profile">Profile</Link>
         {userState ? (
           <Link onClick={handleLogout}>Log Out</Link>
         ) : (

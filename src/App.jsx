@@ -9,7 +9,6 @@ function App() {
       <a className="skip-link" href="#main">
         Skip to main content
       </a>
-
       <Header>
         <NavBar />
       </Header>

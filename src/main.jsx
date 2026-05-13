@@ -7,6 +7,7 @@ import CreateUser from "./CreateUser.jsx";
 import Login from "./Login.jsx";
 import Blog from "./Blog.jsx";
 import Post from "./Post.jsx";
+import Profile from "./Profile.jsx";
 import AuthProvider from "./AuthContext.jsx";
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/posts/:postID",
         element: <Post />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

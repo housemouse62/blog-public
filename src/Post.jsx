@@ -10,6 +10,7 @@ function Post() {
   const [commentState, setCommentState] = useState([]);
   const { userState, tokenState } = useAuth();
   const [refresh, setRefresh] = useState(0);
+
   console.log(userState);
   useEffect(() => {
     const fetchposts = async () => {
@@ -59,6 +60,30 @@ function Post() {
       }
     };
     fetchComment();
+  }
+
+  function handleDeleteComment(e, commentID) {
+    e.preventDefault();
+
+    const deleteComment = async () => {
+      const url = `http://localhost:3000/posts/${params.postID}/comments/${commentID}`;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
+        });
+        const nextresponse = await response.json();
+        if (nextresponse.id) {
+          alert("Comment Deleted");
+          setRefresh((prev) => prev + 1);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    deleteComment();
   }
 
   return (
