@@ -29,6 +29,7 @@ function Blog() {
     <>
       <main className="blog-main">
         <h1 className="blog-title">The Blog</h1>
+        {posts.length <= 0 ? <h2>No Posts Yet! Come back soon!</h2> : ""}
         {posts.map((post) => (
           <div className="blog-div" key={post.id}>
             <h2 className="blog-title">{post.title}</h2>

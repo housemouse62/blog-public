@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,13 @@ function Profile() {
       setCurrentPasswordState("");
     },
   };
+
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+  useEffect(() => {
+    console.log(userState);
+    if (!userState) navigate("/");
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -60,7 +66,7 @@ function Profile() {
         const nextresponse = await response.json();
         console.log("next response", nextresponse);
         if (nextresponse.user) {
-          alert(`${capitalize(editingState)} Updated`);
+          alert(`${editingState ? capitalize(editingState) : ""} Updated`);
           setUserState(nextresponse.user);
           setTokenState(nextresponse.token);
           localStorage.setItem("token", nextresponse.token);
@@ -108,7 +114,7 @@ function Profile() {
           </div>
           <div className="info-div">
             <p>
-              <b>Role:</b> {capitalize(userState.usertype)}
+              <b>Role:</b> {userState ? capitalize(userState.usertype) : ""}
             </p>
           </div>
           <div className="info-div">
