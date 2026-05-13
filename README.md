@@ -1,16 +1,73 @@
-# React + Vite
+# blog-public
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Public-facing frontend for the Thought Windows blog. Built with React 19 and Vite.
 
-Currently, two official plugins are available:
+Readers can browse published posts, register an account, log in, and leave comments and replies.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19
+- **Build tool**: Vite
+- **Routing**: React Router 7
+- **Auth**: JWT via `jwt-decode` + `localStorage`
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the development server:
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+> **Note**: The app expects the `blog-window` API to be running at `http://localhost:3000`.
+
+---
+
+## Scripts
+
+| Script | Description |
+|---|---|
+| `npm run dev` | Start Vite dev server on port 5173 |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+
+---
+
+## Routes
+
+| Path | Component | Auth required |
+|---|---|---|
+| `/` | Login | — |
+| `/createUser` | Register | — |
+| `/posts` | Blog posts list | — |
+| `/posts/:postID` | Single post with comments | — |
+| `/profile` | User profile management | Yes |
+
+---
+
+## Features
+
+- Browse all published blog posts
+- Register and log in as a reader
+- Comment on posts and reply to comments
+- Edit or delete your own comments and replies
+- Update your display name and screen name from the profile page
+
+---
+
+## Authentication
+
+On login, a JWT is stored in `localStorage` under the key `"token"` and decoded client-side with `jwt-decode`. Auth state is managed globally via `AuthContext` (`src/AuthContext.jsx`) and consumed throughout the app. Logging out clears the token from `localStorage`.
