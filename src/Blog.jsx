@@ -8,7 +8,7 @@ function Blog() {
 
   useEffect(() => {
     const fetchposts = async () => {
-      const url = "http://localhost:3000/posts/";
+      const url = `${import.meta.env.VITE_API_URL}/posts/`;
       try {
         const response = await fetch(url);
         if (!response.ok) {

@@ -14,7 +14,7 @@ function Post() {
   console.log(userState);
   useEffect(() => {
     const fetchposts = async () => {
-      const url = `http://localhost:3000/posts/${params.postID}`;
+      const url = `${import.meta.env.VITE_API_URL}/posts/${params.postID}`;
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -35,7 +35,7 @@ function Post() {
     e.preventDefault();
 
     const fetchComment = async () => {
-      const url = `http://localhost:3000/posts/${params.postID}/comments/`;
+      const url = `${import.meta.env.VITE_API_URL}/posts/${params.postID}/comments/`;
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -66,7 +66,7 @@ function Post() {
     e.preventDefault();
 
     const deleteComment = async () => {
-      const url = `http://localhost:3000/posts/${params.postID}/comments/${commentID}`;
+      const url = `${import.meta.env.VITE_API_URL}/posts/${params.postID}/comments/${commentID}`;
       try {
         const response = await fetch(url, {
           method: "DELETE",
